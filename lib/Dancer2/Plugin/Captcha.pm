@@ -1,6 +1,6 @@
 package Dancer2::Plugin::Captcha;
 
-$Dancer2::Plugin::Captcha::VERSION   = '0.01';
+$Dancer2::Plugin::Captcha::VERSION   = '0.02';
 $Dancer2::Plugin::Captcha::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Dancer2::Plugin::Captcha - Dancer2 add-on for CAPTCHA.
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
@@ -26,23 +26,36 @@ use GD::SecurityImage;
 A very simple plugin for L<Dancer2> to process CAPTCHA.I needed this for my other
 project (in-progress) available on L<github|https://github.com/Manwar/Dancer2-Cookbook>.
 
+The core functionality of the plugin is supported by L<GD::SecurityImage>.
+
 =head1 SYNOPSIS
 
 =head2 Setting up the application configuration for the plugin.
 
-  plugins:
-    Captcha:
-      new:
-        width: 160
-        height: 175
-        lines: 5
-        gd_font: 'giant'
-      create: [ 'normal', 'default' ]
-      out:
-        force: 'png'
-      particle: [ 100 ]
+    plugins:
+      Captcha:
+        new:
+          width: 160
+          height: 175
+          lines: 5
+          gd_font: 'giant'
+        create: [ 'normal', 'default' ]
+        out:
+          force: 'png'
+        particle: [ 100 ]
 
 =head2 Setting up the application route handler.
+
+    get '/get_captcha' => sub {
+        return generate_captcha();
+    };
+
+    post '/check_captcha' => sub {
+        return "Invalid captcha code."
+            unless (is_valid_captcha(request->params->{captcha}));
+
+        remove_captcha;
+    };
 
 =head1 CONFIGURATION
 
@@ -59,6 +72,8 @@ The plugin can be configured in the application configuration file as below:
 
 The following keys can be assigned to method 'new':
 
+    +------------+-------------------------------------------------------------------+
+    | Key        | Description                                                       |
     +------------+-------------------------------------------------------------------+
     | width      | The width of the image (in pixels).                               |
     | height     | The height of the image (in pixels).                              |
@@ -82,16 +97,18 @@ The following keys can be assigned to method 'new':
 
 The data should be in the format as below for method 'create':
 
-    [ C<$method>, C<$style>, C<$text_color>, C<$line_color> ]
+    [ $method, $style, $text_color, $line_color ]
 
 The key C<$method> and C<$style> are mandatory and the rest all are optionals.
 
-C<$method> can have one of the following values:
+The key C<$method> can have one of the following values:
 
     normal or ttf
 
-C<$style> can have one of the following values:
+The key C<$style> can have one of the following values:
 
+    +---------+-----------------------------------------------------------------+
+    | Key     | Description                                                     |
     +---------+-----------------------------------------------------------------+
     | default | The default style. Draws horizontal, vertial and angular lines. |
     | rect    | Draws horizontal and vertical lines.                            |
@@ -107,6 +124,8 @@ C<$style> can have one of the following values:
 The following keys can be assigned to method 'out':
 
     +----------+----------------------------------------------------------------+
+    | Key      | Description                                                    |
+    +----------+----------------------------------------------------------------+
     | force    | Can have one of the formats 'jpeg' or 'png' or 'gif'.          |
     | compress | Can be between 1 and 100.                                      |
     +----------+----------------------------------------------------------------+
@@ -115,7 +134,7 @@ The following keys can be assigned to method 'out':
 
 The data should be in the format as below for method 'particle':
 
-    [ C<$density>, C<$maximum_dots> ]
+    [ $density, $maximum_dots ]
 
 =head1 METHODS
 
@@ -179,9 +198,9 @@ register generate_captcha => sub {
 =head2 is_valid_captcha($input, $id)
 
 The C<$input> is the captcha  code  entered by the user and C<$id> is the captcha
-ID. It returns 0 or 1 depending whether the captcha matches or not.
+ID. It returns 0 or 1 depending on whether the captcha matches or not.
 
-    post '/check_captch' => sub {
+    post '/check_captcha' => sub {
         return "Invalid captcha code."
             unless (is_valid_captcha(request->params->{captcha}));
 
