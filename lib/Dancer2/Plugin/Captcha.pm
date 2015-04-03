@@ -1,6 +1,6 @@
 package Dancer2::Plugin::Captcha;
 
-$Dancer2::Plugin::Captcha::VERSION   = '0.02';
+$Dancer2::Plugin::Captcha::VERSION   = '0.03';
 $Dancer2::Plugin::Captcha::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Dancer2::Plugin::Captcha - Dancer2 add-on for CAPTCHA.
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =cut
 
@@ -30,7 +30,11 @@ The core functionality of the plugin is supported by L<GD::SecurityImage>.
 
 =head1 SYNOPSIS
 
-=head2 Setting up the application configuration for the plugin.
+=head2 Setting up the application configuration.
+
+The plugin expect a session engine configured for it to perform its task,
+
+    session: Simple
 
     plugins:
       Captcha:
@@ -72,26 +76,27 @@ The plugin can be configured in the application configuration file as below:
 
 The following keys can be assigned to method 'new':
 
-    +------------+-------------------------------------------------------------------+
-    | Key        | Description                                                       |
-    +------------+-------------------------------------------------------------------+
-    | width      | The width of the image (in pixels).                               |
-    | height     | The height of the image (in pixels).                              |
-    | ptsize     | The point size of the ttf character.                              |
-    | lines      | The number of lines in the background of the image.               |
-    | font       | The absolute path to your TrueType font file.                     |
-    | gd_font    | The possible value are 'small', 'large', 'mediumbold', 'tiny',    |
-    |            | 'giant'.                                                          |
-    | bgcolor    | The background color of the image.                                |
-    | send_ctobg | If has a true value, the random security code will be displayed   |
-    |            | in the background and the lines will pass over it.                |
-    | frame      | If has a true value, a frame will be added around the image.      |
-    | scramble   | If set, the characters will be scrambled.                         |
-    | angle      | Sets the angle (0-360) for scrambled/normal characters.           |
-    | thickness  | Sets the line drawing width.                                      |
-    | mdmax      | The minimum length if the random string. Default is 6.            |
-    | md_data    | Default character set used to create the random string is [0..9]. |
-    +------------+-------------------------------------------------------------------+
+    +------------+--------------------------------------------------------------+
+    | Key        | Description                                                  |
+    +------------+--------------------------------------------------------------+
+    | width      | The width of the image (in pixels).                          |
+    | height     | The height of the image (in pixels).                         |
+    | ptsize     | The point size of the ttf character.                         |
+    | lines      | The number of lines in the background of the image.          |
+    | font       | The absolute path to your TrueType font file.                |
+    | gd_font    | The possible value are 'small', 'large', 'mediumbold',       |
+    |            | 'tiny' and 'giant'.                                          |
+    | bgcolor    | The background color of the image.                           |
+    | send_ctobg | If has a true value, the random security code will be        |
+    |            | displayed in the background and the lines will pass over it. |
+    | frame      | If has a true value, a frame will be added around the image. |
+    | scramble   | If set, the characters will be scrambled.                    |
+    | angle      | Sets the angle (0-360) for scrambled/normal characters.      |
+    | thickness  | Sets the line drawing width.                                 |
+    | mdmax      | The minimum length if the random string. Default is 6.       |
+    | md_data    | Default character set used to create the random string is    |
+    |            | [0..9].                                                      |
+    +------------+--------------------------------------------------------------+
 
 =head2 create
 
@@ -136,12 +141,19 @@ The data should be in the format as below for method 'particle':
 
     [ $density, $maximum_dots ]
 
+The default value for C<$density> is dependent on the image's height & width. The
+greater value of height and width is taken and multiplied by 20 for defaults.
+
+The key C<$maximum_dots> defines the maximum number of dots near the default dot.
+The default value is 1. If you set it to 4, the selected pixel and 3 other pixels
+near it will be used and colored.
+
 =head1 METHODS
 
 =head2 generate_captcha(\%params)
 
 It returns captcha image as per the given parameters. If  the key 'random' is not
-defined then the default character sets 0..9 will be used.
+defined then the default character sets [0..9] will be used.
 
     get '/get_captcha' => sub {
         return generate_captcha({
@@ -153,7 +165,7 @@ defined then the default character sets 0..9 will be used.
             },
             particle => [ 100 ],
             out      => { force => 'png' },
-            random   => <your_randomly_generate_string>,
+            random   => <your_randomly_generated_string>,
         });
     };
 
@@ -223,7 +235,7 @@ register is_valid_captcha => sub {
 
 =head2 remove_captcha($id)
 
-The C<$id> is the captcha id. It removes the captcha from the session.
+The C<$id> is the captcha ID. It removes the captcha from the session.
 
 =cut
 

@@ -1,7 +1,11 @@
 Revision history for Dancer2::Plugin::Captcha
 
-0.02  Thu Apr 2 22:20:00 2015
+0.03  Fri Apr 03 11:50:00 2015
+      - Updated pod document with regards to requirement of session engine.
+      - Added description for key 'density' and 'maximum_dots' of method 'particle'.
+
+0.02  Thu Apr 02 22:20:00 2015
       - Tidied up pod document.
 
-0.01  Thu Apr 2 19:00:00 2015
+0.01  Thu Apr 02 19:00:00 2015
       - Module Created.
