@@ -1,6 +1,6 @@
 package Dancer2::Plugin::Captcha;
 
-$Dancer2::Plugin::Captcha::VERSION   = '0.04';
+$Dancer2::Plugin::Captcha::VERSION   = '0.05';
 $Dancer2::Plugin::Captcha::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Dancer2::Plugin::Captcha - Dancer2 add-on for CAPTCHA.
 
 =head1 VERSION
 
-Version 0.04
+Version 0.05
 
 =cut
 
@@ -290,6 +290,10 @@ Mohammad S Anwar, C<< <mohammad.anwar at yahoo.com> >>
 =head1 REPOSITORY
 
 L<https://github.com/Manwar/Dancer2-Plugin-Captcha>
+
+=head1 ACKNOWLEDGEMENTS
+
+Inspired by the package L<Dancer::Plugin::Captcha::SecurityImage> (Alessandro Ranellucci <aar@cpan.org>).
 
 =head1 SEE ALSO
 
