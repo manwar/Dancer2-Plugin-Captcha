@@ -20,8 +20,8 @@ WriteMakefile(
         'Test::More' => 0,
     },
     PREREQ_PM => {
-        'Dancer2'           => 0,
-        'Dancer2::Plugin'   => 0,
+        'Dancer2'           => '0.159002',
+        'Dancer2::Plugin'   => '0.159002',
         'GD::SecurityImage' => 0,
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },

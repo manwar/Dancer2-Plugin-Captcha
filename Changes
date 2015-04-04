@@ -1,5 +1,9 @@
 Revision history for Dancer2::Plugin::Captcha
 
+0.04  Sat Apr 04 12:25:00 2015
+      - Some cpantester tests were failing because they were running against a
+        too old version of Dancer2.
+
 0.03  Fri Apr 03 11:50:00 2015
       - Updated pod document with regards to requirement of session engine.
       - Added description for key 'density' and 'maximum_dots' of method 'particle'.
