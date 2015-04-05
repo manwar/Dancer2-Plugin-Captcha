@@ -1,6 +1,6 @@
 package Dancer2::Plugin::Captcha;
 
-$Dancer2::Plugin::Captcha::VERSION   = '0.05';
+$Dancer2::Plugin::Captcha::VERSION   = '0.06';
 $Dancer2::Plugin::Captcha::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Dancer2::Plugin::Captcha - Dancer2 add-on for CAPTCHA.
 
 =head1 VERSION
 
-Version 0.05
+Version 0.06
 
 =cut
 
@@ -60,6 +60,15 @@ The plugin expect a session engine configured for it to perform its task,
 
         remove_captcha;
     };
+
+=head2 Setting up the application template.
+
+    <form method="POST" action="/check_captcha">
+        <label>Enter the Captcha</label>
+        <input type="text" name="captcha" style="width: 120px;">
+        <img id="img1" src="<% request.uri_base %>/get_captcha" style="margin-bottom:20px;">
+        <button type="submit">Submit</button>
+    </form>
 
 =head1 CONFIGURATION
 

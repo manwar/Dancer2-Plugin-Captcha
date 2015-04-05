@@ -1,5 +1,8 @@
 Revision history for Dancer2::Plugin::Captcha
 
+0.06  Sun Apr 05 02:50:00 2015
+      - Added sample template to the section "SYNOPSIS".
+
 0.05  Sat Apr 04 12:40:00 2015
       - Added section "ACKNOWLEDGEMENTS" to the pod document.
 
