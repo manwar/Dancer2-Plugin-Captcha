@@ -1,6 +1,6 @@
 package Dancer2::Plugin::Captcha;
 
-$Dancer2::Plugin::Captcha::VERSION   = '0.06';
+$Dancer2::Plugin::Captcha::VERSION   = '0.07';
 $Dancer2::Plugin::Captcha::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Dancer2::Plugin::Captcha - Dancer2 add-on for CAPTCHA.
 
 =head1 VERSION
 
-Version 0.06
+Version 0.07
 
 =cut
 
@@ -54,7 +54,7 @@ The plugin expect a session engine configured for it to perform its task,
         return generate_captcha();
     };
 
-    post '/check_captcha' => sub {
+    post '/validate_captcha' => sub {
         return "Invalid captcha code."
             unless (is_valid_captcha(request->params->{captcha}));
 
@@ -63,7 +63,7 @@ The plugin expect a session engine configured for it to perform its task,
 
 =head2 Setting up the application template.
 
-    <form method="POST" action="/check_captcha">
+    <form method="POST" action="/validate_captcha">
         <label>Enter the Captcha</label>
         <input type="text" name="captcha" style="width: 120px;">
         <img id="img1" src="<% request.uri_base %>/get_captcha" style="margin-bottom:20px;">
@@ -221,7 +221,7 @@ register generate_captcha => sub {
 The C<$input> is the captcha  code  entered by the user and C<$id> is the captcha
 ID. It returns 0 or 1 depending on whether the captcha matches or not.
 
-    post '/check_captcha' => sub {
+    post '/validate_captcha' => sub {
         return "Invalid captcha code."
             unless (is_valid_captcha(request->params->{captcha}));
 
