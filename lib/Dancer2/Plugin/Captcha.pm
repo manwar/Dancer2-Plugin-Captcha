@@ -17,7 +17,6 @@ use 5.006;
 use strict; use warnings;
 use Data::Dumper;
 
-use Dancer2 ':syntax';
 use Dancer2::Plugin;
 use GD::SecurityImage;
 
@@ -274,10 +273,10 @@ sub _save_captcha {
     die "ERROR: Missing captcha key.\n"   unless defined $key;
     die "ERROR: Missing captcha value.\n" unless defined $value;
 
-    my $captcha = $dsl->session('captcha') || {};
+    my $captcha = $dsl->app->session->read('captcha') || {};
     $captcha->{$id} ||= {};
     $captcha->{$id}{$key} = $value;
-    $dsl->session('captcha' => $captcha);
+    $dsl->dsl->app->session->write('captcha' => $captcha);
 }
 
 sub _get_captcha {
@@ -286,7 +285,7 @@ sub _get_captcha {
     die "ERROR: Missing captcha ID.\n"  unless defined $id;
     die "ERROR: Missing captcha key.\n" unless defined $key;
 
-    my $captcha = $dsl->session('captcha');
+    my $captcha = $dsl->app->session->read('captcha');
     return unless defined $captcha;
 
     return $captcha->{$id}{$key};

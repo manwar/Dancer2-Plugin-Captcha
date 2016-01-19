@@ -18,6 +18,9 @@ WriteMakefile(
     },
     BUILD_REQUIRES   => {
         'Test::More' => 0,
+        'HTTP::Cookies'         => 0,
+        'HTTP::Request::Common' => 0,
+        'Plack'                 => '1.0029', # Plack::Test OO interface
     },
     PREREQ_PM => {
         'Dancer2'           => '0.159002',
