@@ -11,7 +11,6 @@ WriteMakefile(
     VERSION_FROM       => 'lib/Dancer2/Plugin/Captcha.pm',
     ABSTRACT_FROM      => 'lib/Dancer2/Plugin/Captcha.pm',
     LICENSE            => 'artistic_2',
-    PL_FILES           => {},
     MIN_PERL_VERSION   => 5.006,
     CONFIGURE_REQUIRES => {
         'ExtUtils::MakeMaker' => 0,
@@ -34,8 +33,8 @@ WriteMakefile(
         resources => {
             repository => {
                 type => 'git',
-                url  => 'https://github.com/Manwar/Dancer2-Plugin-Captcha.git',
-                web  => 'https://github.com/Manwar/Dancer2-Plugin-Captcha',
+                url  => 'https://github.com/manwar/Dancer2-Plugin-Captcha.git',
+                web  => 'https://github.com/manwar/Dancer2-Plugin-Captcha',
             },
         }})
      : ()
