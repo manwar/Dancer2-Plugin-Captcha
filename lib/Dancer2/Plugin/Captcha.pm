@@ -1,6 +1,6 @@
 package Dancer2::Plugin::Captcha;
 
-$Dancer2::Plugin::Captcha::VERSION   = '0.08';
+$Dancer2::Plugin::Captcha::VERSION   = '0.09';
 $Dancer2::Plugin::Captcha::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Dancer2::Plugin::Captcha - Dancer2 add-on for CAPTCHA.
 
 =head1 VERSION
 
-Version 0.08
+Version 0.09
 
 =cut
 
@@ -276,7 +276,7 @@ sub _save_captcha {
     my $captcha = $dsl->app->session->read('captcha') || {};
     $captcha->{$id} ||= {};
     $captcha->{$id}{$key} = $value;
-    $dsl->dsl->app->session->write('captcha' => $captcha);
+    $dsl->app->session->write('captcha' => $captcha);
 }
 
 sub _get_captcha {
@@ -344,7 +344,7 @@ L<http://search.cpan.org/dist/Dancer2-Plugin-Captcha/>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright (C) 2015 Mohammad S Anwar.
+Copyright (C) 2015 - 2017 Mohammad S Anwar.
 
 This program  is  free software; you can redistribute it and / or modify it under
 the  terms  of the the Artistic License (2.0). You may obtain  a copy of the full

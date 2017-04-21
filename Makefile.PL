@@ -15,11 +15,11 @@ WriteMakefile(
     CONFIGURE_REQUIRES => {
         'ExtUtils::MakeMaker' => 0,
     },
-    BUILD_REQUIRES   => {
-        'Test::More' => '0.94', # subtest
+    BUILD_REQUIRES => {
+        'Test::More'            => '0.94',
         'HTTP::Cookies'         => 0,
         'HTTP::Request::Common' => 0,
-        'Plack'                 => '1.0029', # Plack::Test OO interface
+        'Plack'                 => '1.0029',
     },
     PREREQ_PM => {
         'Dancer2'           => '0.159002',
