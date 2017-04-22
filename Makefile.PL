@@ -30,6 +30,9 @@ WriteMakefile(
     clean => { FILES => 'Dancer2-Plugin-Captcha-*' },
     (eval { ExtUtils::MakeMaker->VERSION(6.46) } ? (META_MERGE => {
         'meta-spec' => { version => 2 },
+        provides    => {
+            'Dancer2::Plugin::Captcha' => { file => 'lib/Dancer2/Plugin/Captcha.pm', version => '0.10' },
+        },
         resources => {
             repository => {
                 type => 'git',
