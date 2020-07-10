@@ -158,10 +158,11 @@ near it will be used and colored.
 
 =head1 METHODS
 
-=head2 generate_captcha(\%params)
+=head2 generate_captcha(\%params, $id)
 
-It returns captcha image as per the given parameters. If  the key 'random' is not
-defined then the default character sets [0..9] will be used.
+It returns captcha image as per the given parameters and C<$id> is the captcha
+ID (optional, default value is 'default'). If  the key 'random' is not defined
+then the default character sets [0..9] will be used.
 
     get '/get_captcha' => sub {
         return generate_captcha({
@@ -218,7 +219,8 @@ register generate_captcha => sub {
 =head2 is_valid_captcha($input, $id)
 
 The C<$input> is the captcha  code  entered by the user and C<$id> is the captcha
-ID. It returns 0 or 1 depending on whether the captcha matches or not.
+ID (optional, default value is 'default'). It returns 0 or 1 depending on whether
+the captcha matches or not.
 
     post '/validate_captcha' => sub {
         return "Invalid captcha code."
@@ -243,7 +245,8 @@ register is_valid_captcha => sub {
 
 =head2 remove_captcha($id)
 
-The C<$id> is the captcha ID. It removes the captcha from the session.
+The C<$id> is the captcha ID (optional, default value is 'default').
+It removes the captcha from the session.
 
 =cut
 
