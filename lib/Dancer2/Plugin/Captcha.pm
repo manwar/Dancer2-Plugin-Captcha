@@ -310,7 +310,7 @@ Inspired by the package L<Dancer::Plugin::Captcha::SecurityImage> (Alessandro Ra
 
 =head1 SEE ALSO
 
-L<Dancer::Plugin::Captcha::SecurityImage>
+L<Dancer::Plugin::Captcha::SecurityImage>, L<GD::SecurityImage>
 
 =head1 BUGS
 
