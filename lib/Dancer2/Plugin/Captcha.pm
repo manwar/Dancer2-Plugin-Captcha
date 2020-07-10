@@ -1,6 +1,6 @@
 package Dancer2::Plugin::Captcha;
 
-$Dancer2::Plugin::Captcha::VERSION   = '0.13';
+$Dancer2::Plugin::Captcha::VERSION   = '0.14';
 $Dancer2::Plugin::Captcha::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Dancer2::Plugin::Captcha - Dancer2 add-on for CAPTCHA.
 
 =head1 VERSION
 
-Version 0.13
+Version 0.14
 
 =cut
 
