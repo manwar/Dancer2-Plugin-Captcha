@@ -101,10 +101,12 @@ The following keys can be assigned to method 'new':
     | scramble   | If set, the characters will be scrambled.                    |
     | angle      | Sets the angle (0-360) for scrambled/normal characters.      |
     | thickness  | Sets the line drawing width.                                 |
-    | mdmax      | The minimum length if the random string. Default is 6.       |
-    | md_data    | Default character set used to create the random string is    |
+    | rndmax     | The minimum length if the random string. Default is 6.       |
+    | rnd_data   | Default character set used to create the random string is    |
     |            | [0..9].                                                      |
     +------------+--------------------------------------------------------------+
+
+See L<GD::SecurityImage/new> for more details.
 
 =head2 create
 
